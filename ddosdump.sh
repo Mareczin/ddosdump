@@ -10,7 +10,7 @@
 #====CONFIG START==========
 #Date
 date=$(date +"%d-%B_%H-%M")
-#Your MEGA.nz logins
+#Your MEGA.nz login
 email=email@email.com
 passwd=password
 
