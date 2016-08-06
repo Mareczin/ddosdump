@@ -10,7 +10,7 @@
 #====CONFIG START==========
 #Date
 date=$(date +"%d-%B_%H-%M")
-#Your MEGA.nz login
+#Your MEGA.nz logins
 email=email@email.com
 passwd=password
 
@@ -57,6 +57,15 @@ function netstats() {
   netstat -an | grep :80 | sort > /tmp/ddos/activeConn$date.log
 }
 
+function putinmega() {
+  # TOP IP addresses
+  /usr/bin/megaput /tmp/ddos/udpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #udp send
+  /usr/bin/megaput /tmp/ddos/synflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #tcp send
+  /usr/bin/megaput /tmp/ddos/icmpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #icmp send
+  /usr/bin/megaput /tmp/ddos/activeConn$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #netstat send
+  /usr/bin/megaput /tmp/ddos/topIP$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #topip send
+}
+
 clear
 
 echo ""
@@ -77,16 +86,9 @@ printMessage "Wykonanie polecenia tcpdump ..."
 tcpdump
 printMessage "Wykonywanie poleceń netstat ..."
 netstats
+#send to mega.nz
+putinmega
 
-/usr/bin/megaput /tmp/ddos/udpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #udp send
-
-/usr/bin/megaput /tmp/ddos/synflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #tcp send
-
-/usr/bin/megaput /tmp/ddos/icmpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #icmp send
-
-/usr/bin/megaput /tmp/ddos/activeConn$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #netstat send
-
-/usr/bin/megaput /tmp/ddos/topIP$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #topip send
 printMessage "Wysłano dziennik analiz UDP"
 printMessage "Wysłano dziennik analiz TCP"
 printMessage "Wysłano dziennik analiz ICMP"
