@@ -1,6 +1,7 @@
 #!/bin/bash
 #===============================================================================================
 #   System Required:  CentOS 6,7, Debian, Ubuntu
+#   Version: 1.0.1
 #   Version type: Public
 #	  Extra's:
 #   Author: Mareczin <pm@me> <gg:45602375> <TS3:OnlineSpeak.eu Nick: Mareczin>
@@ -71,7 +72,7 @@ clear
 echo ""
 echo "---------------------------------------------------------------"
 echo "Ktoś cię ddosuje? Znajdźmy go!"
-echo "  Wersja: 0.1"
+echo "  Wersja: 1.0.1"
 echo "  Wymagania: Brak"
 echo "  "
 echo "  Niektóre aktualne statystyki:"
@@ -86,9 +87,11 @@ printMessage "Wykonanie polecenia tcpdump ..."
 tcpdump
 printMessage "Wykonywanie poleceń netstat ..."
 netstats
+
 #send to mega.nz
 putinmega
 
+#ending
 printMessage "Wysłano dziennik analiz UDP"
 printMessage "Wysłano dziennik analiz TCP"
 printMessage "Wysłano dziennik analiz ICMP"
