@@ -11,9 +11,10 @@
 #====CONFIG START==========
 #Date
 date=$(date +"%d-%B_%H-%M")
-#Your MEGA.nz logins
-email=email@email.com
-passwd=password
+#Your MEGA.nz logins (edit in config.cfg)
+source config.cfg
+email=$mega_username
+passwd=$mega_password
 
 #folder on mega, where you want to store you data (vždy musí začínát částí /Root/)
 remotepath=/Root/ddosdumpy
@@ -81,12 +82,15 @@ echo "  Total connections: $NUMBERCONN"
 echo "  Established Connections: $ESTASH"
 echo "---------------------------------------------------------------"
 echo ""
+echo "Reading config...." >&2
+echo "Config for the username: $mega_username" >&2
+echo "Config for the password: $mega_password" >&2
 printMessage "Zaczynam analizować..."
 printMessage "Sprawdzam czy istnieje wymagany folder jeżeli nie utworzę go..."
 ddosdir
 printMessage "Wykonywanie polecenia: tcpdump (potrwa:ok.30s)..."
 tcpdump
-printMessage "Wykonywanie polecenia: netstats (potrwa:ok.30s)..."
+printMessage "Wykonywanie polecenia: netstats..."
 netstats
 
 #send to mega.nz
