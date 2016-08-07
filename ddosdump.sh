@@ -95,11 +95,11 @@ netstats
 putinmega
 
 #ending
-printMessage "Wysłano dziennik analiz UDP"
-printMessage "Wysłano dziennik analiz TCP"
-printMessage "Wysłano dziennik analiz ICMP"
-printMessage "Wysłano dziennik analiz NETSTAT"
-printMessage "Wysłano dziennik analiz TopIP"
+printMessage "Zapisano i wysłano dziennik analiz UDP"
+printMessage "Zapisano i wysłano dziennik analiz TCP"
+printMessage "Zapisano i wysłano dziennik analiz ICMP"
+printMessage "Zapisano i wysłano dziennik analiz NETSTAT"
+printMessage "Zapisano i wysłano dziennik analiz TopIP"
 printMessage "Stworzyłem dzienniki analizy w następującym katalogu: $directory"
 printMessage "Dodatkowo wysłałem je na twoje konto Mega.nz do katalogu: $remotepath"
 
