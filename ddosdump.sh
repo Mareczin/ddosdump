@@ -11,15 +11,12 @@
 #====CONFIG START==========
 #Date
 date=$(date +"%d-%B_%H-%M")
-#Your MEGA.nz logins (edit in config.cfg)
+#Your MEGA.nz logins,remotepath and checktime (edit in config.cfg)
 source config.cfg
 email=$mega_username
 passwd=$mega_password
-
-#folder on mega, where you want to store you data (vždy musí začínát částí /Root/)
-remotepath=/Root/ddosdumpy
-#check time
-checktime=10s
+remotepath=$remotepath
+checktime=$checktime
 #====CONFIG STOP===========
 #==========================
 #====DO NOT EDIT BELOW=====
@@ -45,27 +42,27 @@ function ddosdir() {
 function tcpdump() {
   # just a simple one
   # let's check for udp flooding
-  timeout $checktime tcpdump -n udp > /tmp/ddos/udpflood$date.log
+  timeout $checktime tcpdump -n udp > /tmp/ddos/udpflood.$date.log
   # SYN
-  timeout $checktime tcpdump -n tcp |grep S > /tmp/ddos/synflood$date.log
+  timeout $checktime tcpdump -n tcp |grep S > /tmp/ddos/synflood.$date.log
   # ICMP
-  timeout $checktime tcpdump -n icmp > /tmp/ddos/icmpflood$date.log
+  timeout $checktime tcpdump -n icmp > /tmp/ddos/icmpflood.$date.log
 }
 
 function netstats() {
   # TOP IP addresses
-  netstat -n|grep :80|cut -c 45-|cut -f 1 -d ':'|sort|uniq -c|sort -nr|more > /tmp/ddos/topIP$date.log
+  netstat -n|grep :80|cut -c 45-|cut -f 1 -d ':'|sort|uniq -c|sort -nr|more > /tmp/ddos/topIP.$date.log
   # This will display all active connections to the server
-  netstat -an | grep :80 | sort > /tmp/ddos/activeConn$date.log
+  netstat -an | grep :80 | sort > /tmp/ddos/activeConn.$date.log
 }
 
 function putinmega() {
   # TOP IP addresses
-  /usr/bin/megaput /tmp/ddos/udpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #udp send
-  /usr/bin/megaput /tmp/ddos/synflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #tcp send
-  /usr/bin/megaput /tmp/ddos/icmpflood$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #icmp send
-  /usr/bin/megaput /tmp/ddos/activeConn$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #netstat send
-  /usr/bin/megaput /tmp/ddos/topIP$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #topip send
+  /usr/bin/megaput /tmp/ddos/udpflood.$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #udp send
+  /usr/bin/megaput /tmp/ddos/synflood.$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #tcp send
+  /usr/bin/megaput /tmp/ddos/icmpflood.$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #icmp send
+  /usr/bin/megaput /tmp/ddos/activeConn.$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #netstat send
+  /usr/bin/megaput /tmp/ddos/topIP.$date.log --reload --username=$email --password=$passwd  --path=$remotepath --disable-previews #topip send
 }
 
 clear
