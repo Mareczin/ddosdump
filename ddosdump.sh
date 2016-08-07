@@ -5,7 +5,7 @@
 #   Version type: Public
 #	  Extra's:
 #   Author: Mareczin <pm@me> <gg:45602375> <TS3:OnlineSpeak.eu Nick: Mareczin>
-#   Intro:  github.com/ddosdump
+#   Intro:  github.com/Mareczin/ddosdump
 #===============================================================================================
 
 #====CONFIG START==========
