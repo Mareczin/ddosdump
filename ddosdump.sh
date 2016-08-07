@@ -82,10 +82,11 @@ echo "  Established Connections: $ESTASH"
 echo "---------------------------------------------------------------"
 echo ""
 printMessage "Zaczynam analizować..."
+printMessage "Sprawdzam czy istnieje wymagany folder jeżeli nie utworzę go..."
 ddosdir
-printMessage "Wykonanie polecenia tcpdump ..."
+printMessage "Wykonywanie polecenia: tcpdump (potrwa:ok.30s)..."
 tcpdump
-printMessage "Wykonywanie poleceń netstat ..."
+printMessage "Wykonywanie polecenia: netstats (potrwa:ok.30s)..."
 netstats
 
 #send to mega.nz
