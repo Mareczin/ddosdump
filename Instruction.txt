@@ -1,0 +1,6 @@
+1. Install megaput in your machine.
+(guide ubuntu: http://installion.co.uk/ubuntu/vivid/universe/m/megatools/install/index.html
+debian: http://pastebin.com/1UMeKhCh)
+2. Upload script
+3. Edit config file.
+4. If you are under atack run this script!
